@@ -38,7 +38,7 @@ const PassengerDetailsDialog = ({ open, onClose, selectedSeats, tripId }) => {
       console.log('Booking successful:', response.data);
       setTotalPrice(response.data.totalPrice);  
       onClose(); 
-      alert(`Booking successful! Total price: $${response.data.totalPrice}`);
+      alert(`Booking successful! Total price: Rs ${response.data.totalPrice}`);
       navigate('/home');
     } catch (error) {
       console.error('Booking failed:', error.response?.data || error.message);
