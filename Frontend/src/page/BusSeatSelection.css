@@ -1,7 +1,7 @@
 .bus-layout {
     display: flex;
     flex-wrap: wrap;
-    width: 240px; /* Adjust width based on the container size */
+    width: 240px; 
     margin: auto;
     grid-template-columns: repeat(4, 1fr); 
     grid-gap: 10px;
@@ -37,15 +37,15 @@
     padding: 10px 20px;
     font-size: 16px;
     color: white;
-    background-color: #4CAF50; /* Green background */
+    background-color: #4CAF50; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
     display: block;
-    margin: 20px auto; /* Center the button horizontally */
+    margin: 20px auto;
   }
   .seat.booked {
-    background-color: #FF6347; /* Red to indicate booking */
+    background-color: #FF6347; 
     cursor: not-allowed;
   }
   

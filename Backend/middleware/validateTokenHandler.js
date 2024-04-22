@@ -1,38 +1,115 @@
+// const jwt = require("jsonwebtoken");
+// const cookie = require("cookie");
+// const User = require("../models/userModel");
+
+// const verifySession = async (req, res, next) => {
+//     try{
+//         const authHeader = req.headers['cookie'];
+//         const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
+//         if(!authHeader) {
+//             return res
+//                 .status(401)
+//                 .json(
+//                     {   "status" : "error" ,
+//                         "message": "Login required" }
+//                         );
+//         }
+        
+//         const cookies = cookie.parse(authHeader);
+//         const sessionId = cookies['SessionID'];
+
+//         console.log("cookie",cookie)
+//         jwt.verify(sessionId, ACCESS_TOKEN_SECRET, async (err, decoded) => {
+//             if (err) { 
+//                 return res
+//                     .status(401)
+//                     .json(
+//                         {   "status" : "error" ,
+//                             "message": "This session has expired. Please login" }
+//                             );
+//             }
+//             const { id } = decoded; 
+//             const user = await User.findById(id); 
+//             if (!user) {
+//                 return res
+//                     .status(401)
+//                     .json(
+//                         {   "status" : "error" ,
+//                             "message": "This session has expired. Please login" }
+//                             );
+//             }
+//             const { password, ...data } = user._doc; 
+//             req.user = data; 
+//             next();
+//         });
+//     }catch (err) {
+//         console.log(err)
+//         return res.status(500).json({
+//             status: "error",
+//             code: 500,
+//             data: [],
+//             message: "Server Error",
+//         });
+//     }
+
+// };
+
+// module.exports = { verifySession };
+
+// ------------------------------------------------------------
+
 const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
+const User = require("../models/userModel");
 
-const validateToken = (req, res, next) => {
-    console.log(req.headers)
-    let authHeader = req.headers.authorization; // Ensure this is 'authorization' and not 'Authorization' unless you've specifically set it this way
+const verifySession = async (req, res, next) => {
+    try {
+        const authHeader = req.headers['cookie'];
+        const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
-    if (authHeader && authHeader.startsWith("Bearer ")) {
-        try {
-            // Extract the token from the Authorization header
-            const token = authHeader.split(" ")[1];
-            console.log("Token received:", token); // Debugging output
-
-            // Verify the token
-            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-                if (err) {
-                    console.log("Token verification error:", err.message); // Debugging output
-                    return res.status(401).json({ message: "User is not authorized, token invalid." });
-                }
-                console.log("Decoded token:", decoded); // Debugging output
-                console.log("Access Token Secret Used:", process.env.ACCESS_TOKEN_SECRET); // Make sure this is defined
-
-
-                // Attach the decoded user to the request object
-                req.user = decoded;
-                next(); // Proceed to the next middleware or route handler
+        if (!authHeader) {
+            return res.status(401).json({
+                "status": "error",
+                "message": "Login required"
             });
-        } catch (err) {
-            // Catch parsing errors or other errors
-            console.error("Error handling token:", err);
-            res.status(500).json({ message: "Internal server error while processing token." });
         }
-    } else {
-        // No token was sent
-        res.status(401).json({ message: "No token provided, authorization denied." });
+
+        const cookies = cookie.parse(authHeader);
+        const sessionId = cookies['SessionID'];
+
+        if (!sessionId) {
+            return res.status(401).json({
+                "status": "error",
+                "message": "Session ID not found"
+            });
+        }
+
+        jwt.verify(sessionId, ACCESS_TOKEN_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({
+                    "status": "error",
+                    "message": "This session has expired. Please login again"
+                });
+            }
+            const user = await User.findById(decoded.id);
+            if (!user) {
+                return res.status(404).json({
+                    "status": "error",
+                    "message": "User not found"
+                });
+            }
+            req.user = user;  // Assign the whole user object if needed, or just an ID
+            next();
+        });
+    } catch (err) {
+        console.error('Error verifying session:', err);
+        return res.status(500).json({
+            "status": "error",
+            "message": "Server Error",
+            "error": err.toString()
+        });
     }
 };
 
-module.exports = { validateToken };
+module.exports = { verifySession };
+

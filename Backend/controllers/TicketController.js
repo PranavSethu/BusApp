@@ -13,7 +13,7 @@ const BookingTrip = async (req, res) => {
             return res.status(404).json({ message: 'Trip not found' });
         }
 
-        const user_id = '66250f95e959f1a45cb33c5a';
+        const user_id = req.user._id;
         const busNumber = trip.busNumber;
         const bookingDate = new Date();
         const numberOfSeats = passengers.length;
@@ -61,16 +61,36 @@ const BookingTrip = async (req, res) => {
     }
 };
 
+// const getUserTickets = async (req, res) => {
+//     const { userId } = req.user._id;
+
+//     try {
+//         const tickets = await TicketModel.find({ user_id: userId });
+
+//         if (!tickets.length) {
+//             return res.status(404).json({ message: "No tickets found for this user." });
+//         }
+
+//         res.json(tickets);
+//     } catch (error) {
+//         console.error('Failed to retrieve tickets:', error);
+//         res.status(500).json({
+//             message: "Internal server error while retrieving tickets.",
+//             error: error.message  
+//         });
+//     }
+// };
+// const TicketModel = require('../models/ticketModel');
+// Assuming the other required imports are correct.
+
 const getUserTickets = async (req, res) => {
-    const { userId } = req.params;
+    const userId = req.user;  // Corrected from destructuring to direct access
 
     try {
         const tickets = await TicketModel.find({ user_id: userId });
-
         if (!tickets.length) {
             return res.status(404).json({ message: "No tickets found for this user." });
         }
-
         res.json(tickets);
     } catch (error) {
         console.error('Failed to retrieve tickets:', error);
@@ -85,8 +105,10 @@ const getUserTickets = async (req, res) => {
 
 
 
+
 const getTicketById = async (req,res) =>{
-    const{id} = req.params
+    const{id} = req.params.user._id;
+    console.log(id);
     try{
         const ticket = await TicketModel.findById({id})
         if(ticket){
@@ -101,10 +123,32 @@ const getTicketById = async (req,res) =>{
     }
 };
 
+// ------------------------------------------------------------
+// const getAllUserTicket = async (req, res) => {
+//     try {
+//         const user_id = "66250f95e959f1a45cb33c5a"; 
+
+//         console.log("User ID:", user_id);
+//         const tickets = await TicketModel.find({ user_id: user_id, isBooked: true });
+
+//         if (tickets.length === 0) {
+//             return res.status(404).json({ message: "No active tickets found" });
+//         } else {
+//             return res.status(200).json(tickets);
+//         }
+//     } catch (error) {
+//         console.error("Error fetching tickets:", error.message);
+//         res.status(500).json({
+//             message: "Internal server error",
+//             error: error.message
+//         });
+//     }
+// };
+// -------------------------------------------------------------------------
 const getAllUserTicket = async (req, res) => {
     try {
-        const user_id = "66250f95e959f1a45cb33c5a"; 
-
+        const user_id = req.user._id; // Assuming user ID is sent as a route parameter
+        
         console.log("User ID:", user_id);
         const tickets = await TicketModel.find({ user_id: user_id, isBooked: true });
 
@@ -121,6 +165,7 @@ const getAllUserTicket = async (req, res) => {
         });
     }
 };
+
 
 
 

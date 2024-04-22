@@ -1,91 +1,81 @@
-import React, {useState} from 'react';
-import {  signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock } from "react-icons/fa";
-import './Login.css'
+import './Login.css';
+import axios from 'axios';  
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const auth = getAuth();
-    
-    // --------------------------
+    const [errorMessage, setErrorMessage] = useState(''); 
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
-    // -------------------
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
-    // -----------------------------
-    const onLogin = (e) => {
+
+    const onLogin = async (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            navigate("/home")
-            console.log(user);
+        setErrorMessage(''); 
+        axios.post('http://localhost:4000/api/v1/users/login', { email, password }, {
+            withCredentials: true  
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(error);
-            console.log(errorCode, errorMessage)
+        .then(response => {
+            console.log('Login successful:', response.data);
+            navigate("/home");
+        })
+        .catch(error => {
+            const errorResponse = error.response ? error.response.data.message : 'No response from server';
+            console.error('Login error:', errorResponse);
+            setErrorMessage('Login failed: ' + errorResponse); 
         });
-       
-    }
+    };
 
-    return(
-            <div className='wrapper'>                                                                                                               
-                        <form onSubmit={onLogin}>  
-                             <h1>Login</h1>                                             
-                            <div className='input-box'>
-                                <input
-                                    id="text"
-                                    name="email"
-                                    type="email"                                    
-                                    required                                                                                
-                                    placeholder="Email Address"
-                                    value={email}
-                                    onChange={handleEmailChange}
-                                />
-                                <FaUser className='icon' />
-                            </div>
-
-                            <div className='input-box'>
-                                <input
-                                    type="password"                                                                                                                   
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={handlePasswordChange}
-                                    required
-                                />
-                                 <FaLock className='icon' />
-                            </div>
-                            <div className='remember-forget'>
-                                <label><input type='checkbox' />Remember me</label> 
-                                <a href='#'>Forget password</a>   
-                            </div>                  
-                            <div>
-                                <button type='submit'>      
-                                    Login                                                                  
-                                </button>
-                            </div>                               
-                        </form>
-                       <div className='register-link'>
-                        <p>Don't have an account?
-                                <NavLink to="/signup">
-                                    Sign up
-                                </NavLink>
-                            </p>
-                       </div>
-                                                   
+    return (
+        <div className='wrapper'>
+            <form onSubmit={onLogin}>
+                <h1>Login</h1>
+                <div className='input-box'>
+                    <input
+                        type="email"
+                        placeholder="Email Address"
+                        value={email}
+                        onChange={handleEmailChange}
+                        required
+                    />
+                    <FaUser className='icon' />
                 </div>
-    )
+
+                <div className='input-box'>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        required
+                    />
+                    <FaLock className='icon' />
+                </div>
+                {errorMessage && <div className="error-message">{errorMessage}</div>} 
+                <div className='remember-forget'>
+                    <label><input type='checkbox' /> Remember me</label>
+                    <a href='#'>Forget password?</a>
+                </div>
+                <button type='submit'>Login</button>
+            </form>
+            <div className='register-link'>
+                <p>Don't have an account?
+                    <NavLink to="/signup">Sign up</NavLink>
+                </p>
+            </div>
+        </div>
+    );
 }
- 
-export default Login
+
+export default Login;
+
+

@@ -32,19 +32,17 @@ const searchTrips = async (req, res) => {
     try {
         const { origin, destination, date } = req.query;
 
-        // Validate the query parameters
         if (!origin || !destination || !date) {
             return res.status(400).json({ message: "All parameters (origin, destination, date) are required." });
         }
 
-        // Convert the date from the query string to ensure full day coverage
+
         const dayStart = new Date(date);
-        dayStart.setHours(0, 0, 0, 0); // Start of the specified date
+        dayStart.setHours(0, 0, 0, 0); 
 
         const dayEnd = new Date(date);
-        dayEnd.setHours(23, 59, 59, 999); // End of the specified date
+        dayEnd.setHours(23, 59, 59, 999); 
 
-        // Find trips that match the criteria
         const matchingTrips = await TripModel.find({
             "origin": origin,
             "destination": destination,

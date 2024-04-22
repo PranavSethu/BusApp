@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './BusSearch.css';
 
+
+axios.defaults.withCredentials = true;
 export default function BusSearch() {
+
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useState({
         from: '',
@@ -21,7 +24,7 @@ export default function BusSearch() {
 
     const fetchTrips = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/api/v1/users/trips/getAll");
+            const response = await axios.get("http://localhost:4000/api/v1/users/trips/getAll",{ withCredentials: true });
             setAllTrips(response.data);
             setSearchResults(response.data);  
         } catch (error) {
@@ -44,6 +47,7 @@ export default function BusSearch() {
         setSearchResults(filteredTrips);
     };
 
+
     const handleBookSeats = (busDetails) => {
         if (busDetails && busDetails._id) {
             navigate(`/busseatselection/${busDetails._id}`, { state: { busDetails } });
@@ -54,7 +58,7 @@ export default function BusSearch() {
 
     const fetchUserTickets = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/api/v1/users/tickets");
+            const response = await axios.get("http://localhost:4000/api/v1/users/tickets",{ withCredentials: true });
             setUserTickets(response.data);
             setShowUserTickets(!showUserTickets); 
         } catch (error) {
@@ -65,7 +69,7 @@ export default function BusSearch() {
 
     const handleCancelTicket = async (ticketId) => {
         try {
-            const response = await axios.put(`http://localhost:4000/api/v1/users/tickets/${ticketId}/cancel`);
+            const response = await axios.put(`http://localhost:4000/api/v1/users/tickets/${ticketId}/cancel`,{ withCredentials: true });
             
             if (response.status === 200) {
                 const updatedTickets = userTickets.filter(ticket => ticket._id !== ticketId);
@@ -79,12 +83,24 @@ export default function BusSearch() {
             alert('Failed to cancel ticket: ' + (error.response?.data?.message || error.message));
         }
     };
+    const handleLogout = async () => {
+        try {
+            await axios.get("http://localhost:4000/api/v1/users/logout", { withCredentials: true });
+            navigate('/');
+        } catch (error) {
+            console.error("Logout failed:", error);
+            alert('Failed to logout: ' + (error.response?.data?.message || error.message));
+        }
+    };
 
     return (
-        <>
-            <button className="user-details-button" onClick={fetchUserTickets}>
-                {showUserTickets ? "Hide User Tickets" : "User Booking History"}
-            </button>
+        <>  
+             <div className="header-container">
+                <button className="user-details-button" onClick={fetchUserTickets}>
+                    {showUserTickets ? "Hide User Tickets" : "User Booking History"}
+                </button>
+                <button onClick={handleLogout} className="logout-button">Logout</button>
+            </div>
             <div className='search-container'>
                 <form className="search-form" onSubmit={handleSubmit}>
                     <div className='from'>

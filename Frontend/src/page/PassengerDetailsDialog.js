@@ -34,7 +34,7 @@ const PassengerDetailsDialog = ({ open, onClose, selectedSeats, tripId }) => {
     setLoading(true);
     const apiUrl = `http://localhost:4000/api/v1/users/tickets/${tripId}`;
     try {
-      const response = await axios.post(apiUrl, { passengers });
+      const response = await axios.post(apiUrl, { passengers },{ withCredentials: true });
       console.log('Booking successful:', response.data);
       setTotalPrice(response.data.totalPrice);  
       onClose(); 

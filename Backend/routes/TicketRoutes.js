@@ -1,16 +1,14 @@
 const express = require("express");
 const { BookingTrip, getTicketById, getAllUserTicket, cancelTicket,getUserTickets,getBookedSeats} = require("../controllers/TicketController");
 // const { getUserTickets } = require('../controllers/ticketController');
-const {validateToken} = require("../middleware/validateTokenHandler");
+const {verifySession} = require("../middleware/validateTokenHandler");
 const TicketRouter = express.Router();
 
-// TicketRouter.use(validateToken)
-// Express Router setup
-TicketRouter.post('/tickets/:trip_id', BookingTrip);
+TicketRouter.post('/tickets/:trip_id',verifySession,BookingTrip);
 TicketRouter.get("/tickets/:id", getTicketById);
-TicketRouter.get("/tickets", getAllUserTicket);
-TicketRouter.get('/tickets/user/:userId', getUserTickets);
-TicketRouter.get("/trips/booked/:tripId", getBookedSeats);
-TicketRouter.put("/tickets/:id/cancel", cancelTicket);  // Added ticket_id as a parameter
+TicketRouter.get("/tickets",verifySession,getAllUserTicket);
+TicketRouter.get('/tickets/user/:userId',verifySession,getUserTickets);
+TicketRouter.get("/trips/booked/:tripId",verifySession,getBookedSeats);
+TicketRouter.put("/tickets/:id/cancel",verifySession,cancelTicket);  
 
-module.exports = TicketRouter;
+module.exports = TicketRouter;  

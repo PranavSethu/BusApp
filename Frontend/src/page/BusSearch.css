@@ -1,15 +1,16 @@
-.search-container{
+.search-container {
     display: flex;
+    flex-direction: column;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 10px;
     padding: 20px;
-    margin: 20px 70px 70px 70px;
+    margin: 10px 70px; /* Adjusted top margin */
+    margin-top: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 280px;
     backdrop-filter: blur(30px);
     background-color: rgba(15, 24, 52, 0.808);
-
 }
+
 .search-form {
     margin-left: 250px;
     color: white;
@@ -129,6 +130,31 @@
 .ticket-details p {
     margin: 5px 0;
 }
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between; 
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.user-details-button, .logout-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #B0C4DEFF;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.logout-button{
+    margin-right: 60px;
+}
 .user-details-button{
-    margin-left: 1450px;
+    margin-left: 70px;
 }
