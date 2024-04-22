@@ -1,0 +1,23 @@
+.dialog-container {
+  background-color: rgba(35, 52, 103, 0.808); 
+  color: white; 
+}
+
+.dialog-content {
+  padding: 20px; 
+}
+
+.dialog-actions {
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.dialog-actions button {
+  font-size: 13px;
+  margin-right: 7px;
+  color: black; 
+  border: black;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color:#B0C4DEFF;
+}

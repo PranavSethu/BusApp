@@ -1,0 +1,63 @@
+/* SeatSelection.css */
+.seat-map {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Adjust the number based on the actual layout */
+  grid-gap: 10px;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid #000;
+  border-radius: 10px; /* Big border around the entire seat map */
+  height: 540px;
+  max-width: max-content;
+  background: rgb(201, 203, 205); /* Light background for the entire seat map area */
+}
+
+.seat {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.selection-heading{
+  margin-left: 760px;
+  margin-bottom: 70px;
+}
+
+/* State-based styles */
+.available {
+  background-color: white; /* Green for available seats */
+}
+
+.unavailable {
+  background-color: grey; /* Dark grey for unavailable seats */
+  cursor: not-allowed; /* Change cursor to indicate the seat is not selectable */
+}
+
+.pending {
+  background-color: rgba(252, 217, 15, 0.623); /* Light yellow for pending seats */
+  cursor: not-allowed; /* Change cursor to indicate the seat is not selectable */
+}
+
+.selected {
+  background-color: rgba(15, 24, 52, 0.808); /* Dark green for selected seats */
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color:  #B0C4DEFF;
+  border-radius: 10px;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(15, 24, 52, 0.808) ; /* Slightly darker green on hover */
+}

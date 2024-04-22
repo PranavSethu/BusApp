@@ -1,0 +1,46 @@
+.payment-form-container {
+    background-color: rgba(15, 24, 52, 0.808);
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    max-width: 400px;
+    margin: 50px auto;
+    color: white;
+    padding: 60px;
+    border-radius: 16px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.payment-form h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color:  #B0C4DEFF;
+    color: black;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color:rgba(15, 24, 52, 0.808);
+    color: white;
+}

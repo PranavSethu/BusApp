@@ -1,0 +1,134 @@
+.search-container{
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 70px 70px 70px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 280px;
+    backdrop-filter: blur(30px);
+    background-color: rgba(15, 24, 52, 0.808);
+
+}
+.search-form {
+    margin-left: 250px;
+    color: white;
+}
+
+.search-form .from{
+    padding: 10px;
+}
+
+.search-form .to{
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.search-form .date{
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.search-form #from-label{
+    font-weight: bolder;
+    font-size: 20px;
+}
+.search-form .from-input{
+    margin-left: 20px;
+    height: 30px;
+    width:860px;
+    border-radius: 10px;
+    border: none;
+}
+.search-form .to-input{
+    margin-left: 43px;
+    height: 30px;
+    width:865px;
+    border-radius: 10px;
+    border: none;
+
+}
+
+.search-form .date-input{
+    margin-left: 24px;
+    height: 30px;
+    width: 300px;
+    border-radius: 10px;
+    border: none;
+
+}
+
+.search-form button{
+    padding: 8px;
+    width: 100px;
+    border-radius: 8px;
+    color: black;
+    margin-top: 20px;
+    margin-left: 280px;
+    background-color:#B0C4DEFF;
+    box-shadow: none;
+    
+}
+.result-item button{
+    background-color: #B0C4DEFF;
+    color: black;
+    border-radius: 5px;
+    padding: 4px;
+    margin-top: 5px;
+    border: none;
+}
+
+.search-results {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    padding-left: 400px;
+  }
+  
+  .result-item {
+    margin-bottom: 10px;
+    padding: 20px;
+    padding-left: 60px;
+    background-color:rgba(15, 24, 52, 0.808);
+    /* background: transparent; */
+    backdrop-filter: blur(30px);
+    border:  1px solid rgba(255, 255, 255, 0.18); ;
+    margin-right: 300px;
+    border-radius: 10px;
+    color: white;
+    /* width: 100%; */
+
+  }
+  
+  .result-item p {
+    margin: 5px 0;
+    justify-content: center;
+  }
+  
+  .results-container{
+    border:1px solid black;
+    border-radius: 10px;
+    margin: 63px;
+  }
+
+  .user-tickets {
+    background-color: rgba(15, 24, 52, 0.808);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    /* margin-top: px; */
+}
+
+.ticket-details {
+    background-color: rgba(15, 24, 52, 0.8);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-details p {
+    margin: 5px 0;
+}
+.user-details-button{
+    margin-left: 1450px;
+}
