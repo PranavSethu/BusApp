@@ -72,6 +72,13 @@ app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
 }));
+app.use(cors(
+    {
+        origin: 'https://bookingapp-1q0kdgc5k-pranavsethus-projects.vercel.app/',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true,
+    }
+));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
