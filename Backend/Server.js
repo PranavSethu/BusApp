@@ -67,9 +67,16 @@ app.use((req, res, next) => {
 });
 
 // const cors = require('cors');
+// const cors = require('cors');
+// app.use(cors({
+//     origin: ['http://localhost:3000', 'https://bus-app-two.vercel.app/'], 
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE']
+// }));
+
 const cors = require('cors');
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://bus-app-two.vercel.app/'], 
+    origin: ['https://bus-app-two.vercel.app', 'http://localhost:3000'], // Your frontend URL and local URL
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
