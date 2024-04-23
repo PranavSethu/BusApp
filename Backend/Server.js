@@ -66,19 +66,14 @@ app.use((req, res, next) => {
     next();
 });
 
+// const cors = require('cors');
 const cors = require('cors');
-// app.use(cors());
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://bus-app-api.vercel.app'], 
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
-app.use(cors(
-    {
-        origin: 'https://bus-app-api.vercel.app/',
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        credentials: true,
-    }
-));
+
 
 // Middleware to parse JSON bodies
 app.use(express.json());
