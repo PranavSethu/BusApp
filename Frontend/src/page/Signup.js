@@ -76,7 +76,7 @@ const Signup = () => {
             </form>
             <p className='already'>
                 Already have an account?{' '}
-                <NavLink to="/login">Sign in</NavLink>
+                <NavLink to="/">Sign in</NavLink>
             </p>
         </div>
     );
