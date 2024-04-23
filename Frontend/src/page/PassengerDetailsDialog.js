@@ -32,7 +32,7 @@ const PassengerDetailsDialog = ({ open, onClose, selectedSeats, tripId }) => {
       return;
     }
     setLoading(true);
-    const apiUrl = `http://localhost:4000/api/v1/users/tickets/${tripId}`;
+    const apiUrl = `https://busapp-fgg9.onrender/api/v1/users/tickets/${tripId}`;
     try {
       const response = await axios.post(apiUrl, { passengers },{ withCredentials: true });
       console.log('Booking successful:', response.data);

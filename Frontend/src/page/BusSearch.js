@@ -24,7 +24,7 @@ export default function BusSearch() {
 
     const fetchTrips = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/api/v1/users/trips/getAll",{ withCredentials: true });
+            const response = await axios.get("https://busapp-fgg9.onrender/api/v1/users/trips/getAll",{ withCredentials: true });
             setAllTrips(response.data);
             setSearchResults(response.data);  
         } catch (error) {
@@ -58,7 +58,7 @@ export default function BusSearch() {
 
     const fetchUserTickets = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/api/v1/users/tickets",{ withCredentials: true });
+            const response = await axios.get("https://busapp-fgg9.onrender/api/v1/users/tickets",{ withCredentials: true });
             setUserTickets(response.data);
             setShowUserTickets(!showUserTickets); 
         } catch (error) {
@@ -69,7 +69,7 @@ export default function BusSearch() {
 
     const handleCancelTicket = async (ticketId) => {
         try {
-            const response = await axios.put(`http://localhost:4000/api/v1/users/tickets/${ticketId}/cancel`,{ withCredentials: true });
+            const response = await axios.put(`https://busapp-fgg9.onrender/api/v1/users/tickets/${ticketId}/cancel`,{ withCredentials: true });
             
             if (response.status === 200) {
                 const updatedTickets = userTickets.filter(ticket => ticket._id !== ticketId);
@@ -85,7 +85,7 @@ export default function BusSearch() {
     };
     const handleLogout = async () => {
         try {
-            await axios.get("http://localhost:4000/api/v1/users/logout", { withCredentials: true });
+            await axios.get("https://busapp-fgg9.onrender/api/v1/users/logout", { withCredentials: true });
             navigate('/');
         } catch (error) {
             console.error("Logout failed:", error);
