@@ -74,7 +74,7 @@ app.use(cors({
 }));
 app.use(cors(
     {
-        origin: 'https://bookingapp-1q0kdgc5k-pranavsethus-projects.vercel.app/',
+        origin: 'https://bus-app-api.vercel.app/',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
     }
