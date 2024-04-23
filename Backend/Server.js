@@ -85,6 +85,17 @@ app.use(cors({
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(cookieParser());
+// After all routes
+app.use((req, res, next) => {
+    res.status(404).send('404 Not Found');
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
 
 // Import routes
 const AdminRouter = require("./routes/AdminRoutes");
