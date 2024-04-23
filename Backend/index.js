@@ -32,6 +32,10 @@ app.use("/api/v1/users", TripRouter);
 app.use("/api/v1/users", TicketRouter);
 app.use("/api/v1/users", AuthRouter);
 
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         app.listen(process.env.PORT, () => {
