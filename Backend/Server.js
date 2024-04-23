@@ -10,11 +10,19 @@ app.use((req, res, next) => {
 });
 
 const cors = require('cors');
+// app.use(cors({
+//     origin: 'https://bus-booking-lemon.vercel.app/',
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE']
+// }));
+// const cors = require('cors');
 app.use(cors({
-    origin: 'https://bus-booking-lemon.vercel.app/',
+    origin: 'https://bus-booking-lemon.vercel.app', // Removed the trailing slash
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
+
+
 
 
 app.use(express.json());

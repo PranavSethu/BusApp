@@ -29,7 +29,7 @@ const Signup = () => {
             const data = await response.json();
             if (response.ok) {
                 console.log('User registered:', data);
-                navigate("/"); // Assuming you have a login route
+                navigate("/"); 
             } else {
                 throw new Error(data.message || 'Failed to register');
             }

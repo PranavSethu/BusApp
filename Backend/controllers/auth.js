@@ -33,7 +33,7 @@ const loginUser = async (req, res) => {
           console.log("cookie", cookie);
           console.log("token", token);
           res.set({
-            "Access-Control-Allow-Origin": "https://bus-booking-lemon.vercel.app/",
+            "Access-Control-Allow-Origin": "https://bus-booking-lemon.vercel.app",
             "Access-Control-Allow-Credentials": true,
           });
           res.status(200).json({
