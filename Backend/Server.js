@@ -69,7 +69,7 @@ app.use((req, res, next) => {
 // const cors = require('cors');
 const cors = require('cors');
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://bus-app-api.vercel.app'], 
+    origin: ['http://localhost:3000', 'https://bus-app-two.vercel.app/'], 
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
