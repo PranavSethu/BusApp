@@ -25,7 +25,7 @@ const Signup = () => {
         };
 
         try {
-            const response = await fetch('https://busapp-fgg9.onrender.com/v1/users/register', requestOptions);
+            const response = await fetch('https://busapp-fgg9.onrender.com/api/v1/users/register', requestOptions);
             const data = await response.json();
             if (response.ok) {
                 console.log('User registered:', data);
