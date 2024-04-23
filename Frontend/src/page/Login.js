@@ -21,7 +21,7 @@ const Login = () => {
     const onLogin = async (e) => {
         e.preventDefault();
         setErrorMessage(''); 
-        axios.post('https://busapp-fgg9.onrender/api/v1/users/login', { email, password }, {
+        axios.post('https://busapp-fgg9.onrender.com/api/v1/users/login', { email, password }, {
             withCredentials: true  
         })
         .then(response => {

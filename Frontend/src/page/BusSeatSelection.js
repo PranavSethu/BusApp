@@ -21,7 +21,7 @@ const BusSeatSelection = () => {
 
   const fetchBookedSeats = async () => {
     try {
-      const response = await axios.get(`https://busapp-fgg9.onrender/api/v1/users/trips/booked/${tripId}`);
+      const response = await axios.get(`https://busapp-fgg9.onrender.com/api/v1/users/trips/booked/${tripId}`);
       if (response.data.bookedSeats) {
         setBookedSeats(response.data.bookedSeats);
       } else {
@@ -61,7 +61,7 @@ const BusSeatSelection = () => {
   const handleBookSeats = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`https://busapp-fgg9.onrender/api/v1/users/tickets/${tripId}`, { passengers });
+      const response = await axios.post(`https://busapp-fgg9.onrender.com/api/v1/users/tickets/${tripId}`, { passengers });
       alert('Booking successful!');
       fetchBookedSeats(); // Refresh booked seats after booking
       setSelectedSeats([]); // Clear selections
